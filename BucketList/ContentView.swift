@@ -44,6 +44,8 @@ struct ContentView: View {
                 .sheet(item: $viewModel.selectedPlace) { place in
                     EditView(location: place) {
                         viewModel.update(location: $0)
+                    } onDelete: { place in
+                        viewModel.deleteLocation(location: place)
                     }
                 }
             }

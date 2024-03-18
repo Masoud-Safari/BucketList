@@ -18,16 +18,29 @@ struct EditView: View {
     @State private var name: String
     @State private var description: String
     var onSave: (Location) -> Void
+    var onDelete: (Location) -> Void
     
     @State private var loadingState = LoadingState.loading
     @State private var pages: [Page] = []
     
+    @State private var showDeleteAlert = false
+    
     var body: some View {
         NavigationStack {
             Form {
-                Section {
-                    TextField("Place name", text: $name)
-                    TextField("Description", text: $description)
+                VStack {
+                    HStack {
+                        VStack {
+                            Section {
+                                TextField("Place name", text: $name)
+                                TextField("Description", text: $description)
+                            }
+                        }
+                        
+                        Button("Delete", role: .destructive) {
+                            showDeleteAlert = true
+                        }
+                    }
                 }
                 
                 Section("Nearby…") {
@@ -62,12 +75,23 @@ struct EditView: View {
             .task {
                 await fetchNearbyPlaces()
             }
+            .alert("Are you sure?", isPresented: $showDeleteAlert) {
+                Button("Delete", role: .destructive) {
+                    onDelete(location)
+                    dismiss()
+                }
+                
+                Button("Cancel", role: .cancel) {
+                    
+                }
+            }
         }
     }
     
-    init(location: Location, onSave: @escaping (Location) -> Void) {
+    init(location: Location, onSave: @escaping (Location) -> Void, onDelete: @escaping (Location) -> Void) {
         self.location = location
         self.onSave = onSave
+        self.onDelete = onDelete
         
         _name = State(initialValue: location.name)
         _description = State(initialValue: location.description)
@@ -93,5 +117,5 @@ struct EditView: View {
 }
 
 #Preview {
-    EditView(location: .example) { _ in }
+    EditView(location: .example) { _ in } onDelete: { _ in }
 }

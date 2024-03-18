@@ -43,6 +43,13 @@ extension ContentView {
             save()
         }
         
+        func deleteLocation(location: Location) {
+            if let index = locations.firstIndex(of: location) {
+                locations.remove(at: index)
+                save()
+            }
+        }
+        
         func update(location: Location) {
             guard let selectedPlace else { return }
             
