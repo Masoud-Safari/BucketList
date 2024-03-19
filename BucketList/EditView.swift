@@ -36,9 +36,7 @@ struct EditView: View {
                             }
                         }
                         
-                        Button("Delete", role: .destructive) {
-                            showDeleteAlert = true
-                        }
+                        
                     }
                 }
                 
@@ -61,14 +59,23 @@ struct EditView: View {
             }
             .navigationTitle("Place details")
             .toolbar {
-                Button("Save") {
-                    var newLocation = location
-                    newLocation.id = UUID()
-                    newLocation.name = name
-                    newLocation.description = description
+                HStack {
+                    Button(role: .destructive) {
+                        showDeleteAlert = true
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                            .foregroundStyle(.red)
+                    }
                     
-                    onSave(newLocation)
-                    dismiss()
+                    Button("Save") {
+                        var newLocation = location
+                        newLocation.id = UUID()
+                        newLocation.name = name
+                        newLocation.description = description
+                        
+                        onSave(newLocation)
+                        dismiss()
+                    }
                 }
             }
             .alert("Are you sure?", isPresented: $showDeleteAlert) {
