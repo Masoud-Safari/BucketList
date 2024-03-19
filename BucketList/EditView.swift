@@ -35,8 +35,6 @@ struct EditView: View {
                                 TextField("Description", text: $description)
                             }
                         }
-                        
-                        
                     }
                 }
                 

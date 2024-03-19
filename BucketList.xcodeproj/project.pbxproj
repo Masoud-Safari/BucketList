@@ -63,9 +63,9 @@
 			children = (
 				C5FC35C62BA25D67006BAA47 /* BucketListApp.swift */,
 				C5FC35C82BA25D67006BAA47 /* ContentView.swift */,
-				C5CC16C02BA8C50400A44E8B /* EditView-ViewModel.swift */,
 				C5CC16992BA553E400A44E8B /* Result.swift */,
 				C523B4332BA4F78900F68CEF /* EditView.swift */,
+				C5CC16C02BA8C50400A44E8B /* EditView-ViewModel.swift */,
 				C5CC16BC2BA671D300A44E8B /* ContentView-ViewModel.swift */,
 				C523B4312BA419ED00F68CEF /* Location.swift */,
 				C5FC35CA2BA25D69006BAA47 /* Assets.xcassets */,
